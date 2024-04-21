@@ -4,12 +4,32 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import DetailPage from "pages/DetailPage";
+import ErrorPage from "pages/ErrorPage";
+import Main from "pages/Main";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <Main /> },
+      {
+        path: "/detail/:id",
+        element: <DetailPage />,
+      },
+    ],
+  },
+]);
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

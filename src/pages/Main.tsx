@@ -3,8 +3,9 @@ import Unions from "lib/unions";
 const Main = () => {
   console.log(Unions.size.min);
   const MainContainer = styled.main`
-    width: 80%;
-    height: 80%;
+    height: 100%;
+
+    padding-top: 90px;
     background-color: transparent;
 
     border: 1px solid gray;
