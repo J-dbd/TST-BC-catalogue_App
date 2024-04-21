@@ -138,3 +138,5 @@ REACT_APP_DEV_API_URL = https://dummyjson.com/products
 
 - 3d button : [link](https://codepen.io/FelipeMarcos/pen/DyEgda)
 - css loader : [link](https://cssloaders.github.io/)
+- 
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJ-dbd%2FTST-BC-catalogue_App&count_bg=%2368D981&title_bg=%23347D90&icon=&icon_color=%23000000&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
