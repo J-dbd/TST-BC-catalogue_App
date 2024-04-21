@@ -1,3 +1,5 @@
+![image](https://github.com/J-dbd/TST-BC-catalogue_App/assets/108377644/b458267f-be39-4be9-9ed6-81204046cff9)
+
 # Implements
 
 - Language: `TypeScript`
