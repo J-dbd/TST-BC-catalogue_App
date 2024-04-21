@@ -1,7 +1,10 @@
 .App {
+  height: 100%;
   display: flex;
 
   margin: 0;
   padding: 0;
   border: 0;
+
+  background-color: #f0f0f0;
 }

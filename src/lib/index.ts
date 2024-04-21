@@ -3,11 +3,8 @@ export type Product = {
   title: string;
   description: string;
   price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
+
   brand: string;
-  category: string;
   thumbnail: string;
   images: string[];
 };
@@ -21,5 +18,13 @@ export type ProductsAPIRes = {
 
 export type LinkProps = {
   content: string;
-  toUrl: string;
+  toUrl: string | null;
+  onClick?: () => void | null;
+  state?: Product[];
+};
+
+export type PaginationProps = {
+  limit: number;
+  skip: number;
+  selects: string[];
 };

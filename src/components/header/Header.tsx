@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { searchModeState } from "lib/recoil";
+
 import styled from "@emotion/styled";
 import Unions from "lib/unions";
-import { Link } from "react-router-dom";
-import LinkStyle3D from "styles/LinkStyle";
+
+import LinkStyle3D from "styles/LinkStyle3D";
+import SearchBar from "components/searchBar/SearchBar";
+
 const Header = () => {
+  const isSearchMode = useRecoilValue(searchModeState);
+  const navigate = useNavigate();
   const HeaderContainer = styled.header`
     display: flex;
 
@@ -30,11 +38,27 @@ const Header = () => {
     }
   `;
 
+  const hanldeGoToList = () => {
+    const { mode, yoffset, keyword } = isSearchMode;
+    if (mode) {
+      navigate("/search", {
+        state: { keyword, yoffset },
+      });
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <HeaderContainer>
-      <h1 className="left-title">과제 테스트</h1>
+      <h1 className="left-title">[배컴] 사전과제</h1>
+      <SearchBar />
       <nav className="right-button">
-        <LinkStyle3D content={"목록으로 돌아가기"} toUrl={"/"} />
+        <LinkStyle3D
+          content={"목록으로 돌아가기"}
+          onClick={hanldeGoToList}
+          toUrl={null}
+        />
       </nav>
     </HeaderContainer>
   );

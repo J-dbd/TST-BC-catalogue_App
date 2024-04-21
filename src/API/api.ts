@@ -1,4 +1,4 @@
-import { ProductsAPIRes } from "lib";
+import { PaginationProps, ProductsAPIRes } from "lib";
 class API {
   baseURL: string;
 
@@ -31,16 +31,29 @@ class API {
     }
   }
 
+  async getProudctsByPage(reqData: PaginationProps): Promise<ProductsAPIRes> {
+    try {
+      const { limit, skip, selects } = reqData;
+      const selectData = selects.join(",");
+      const res = await fetch(
+        `${this.baseURL}?limit=${limit}&skip=${skip}&select=${selectData}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error("[getProudctsByPage] fetch error:", error);
+      throw error;
+    }
+  }
+
   async getSeachData(keyword: string): Promise<ProductsAPIRes> {
     const reqUrl = `${this.baseURL}/search?q=${keyword}`;
-    console.log("reqUrl", reqUrl);
     try {
       const res = await fetch(reqUrl);
       const data = await res.json();
-      console.log("검색데이터", data);
       return data;
     } catch (error) {
-      console.error("[getSeracData] fetch error", error);
+      console.error("[getsearchData] fetch error", error);
       throw error;
     }
   }

@@ -9,10 +9,6 @@ const Layout = () => {
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-
-    background-color: #f0f0f0;
   `;
 
   return (

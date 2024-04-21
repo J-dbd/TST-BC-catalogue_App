@@ -1,0 +1,23 @@
+.searching_input {
+  height: 20px;
+  padding: 12px 5px;
+  font-size: 16px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px soild green none;
+  border-radius: calc(6 * 1px);
+  text-align: center;
+  outline: transparent;
+  width: 100%;
+  color: black;
+  transition: border-color calc(0.2 * 1s) ease;
+}
+
+.searching_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
