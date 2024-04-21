@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import styled from "@emotion/styled";
 import API from "API/api";
@@ -14,6 +14,7 @@ const SearchPage = () => {
   const [itemLists, setItemList] = useState<Product[]>([]);
   const [isEmpty, SetIsEmpty] = useState(false);
   const location = useLocation();
+  const navigator = useNavigate();
 
   const keyword = location.state.keyword;
 
@@ -35,7 +36,9 @@ const SearchPage = () => {
       } else {
         if (resData.total === 0) {
           SetIsEmpty(true);
-          return null;
+          setTimeout(() => {
+            navigator("/");
+          }, 3000);
         }
         setItemList(resData.products);
       }
@@ -57,6 +60,7 @@ const SearchPage = () => {
       <MainContainer>
         <PrdSection>
           <EmptyPage>검색 결과가 존재하지 않습니다!</EmptyPage>
+          <p>3초 뒤 목록으로 돌아갑니다.</p>
         </PrdSection>
       </MainContainer>
     );
