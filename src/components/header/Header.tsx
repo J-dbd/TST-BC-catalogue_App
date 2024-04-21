@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <h1 className="left-title">[배컴] 사전과제</h1>
+      <h1 className="left-title">[배컴] FE PreTask</h1>
       <SearchBar />
       <nav className="right-button">
         <LinkStyle3D
