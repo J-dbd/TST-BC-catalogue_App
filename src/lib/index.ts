@@ -18,3 +18,8 @@ export type ProductsAPIRes = {
   skip: number;
   limit: number;
 };
+
+export type LinkProps = {
+  content: string;
+  toUrl: string;
+};

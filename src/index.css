@@ -20,8 +20,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-//for global setting
-:root {
-  --basic-min-width: 300px;
-}
