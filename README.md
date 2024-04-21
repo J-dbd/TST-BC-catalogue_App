@@ -5,6 +5,7 @@
 - Routing : `react-router-dom`
 - Styling: `emotion.js`
 - state management library : `Recoil`
+- period: 24.04.22
 
 ## Implement Tree
 
@@ -45,10 +46,10 @@
 7 directories, 26 files
 ```
 
-- components: 컴포넌트 단위로 작동하는 모듈이 존재합니다.
-- lib: type, recoil atom, css관련 통일 단위 등을 담아두는 디렉토리입니다.
-- pages: react-router-dom으로 이동하는 페이지들입니다.
-- style: 스타일 단위로 자주 쓰는 코드들을 모아두는 디렉토리입니다.
+- **components**: 기능 중심으로 분류한 컴포넌트들을 모아두는 디렉토리입니다.
+- **lib**: `type`, `recoil atom`, css관련 통일 단위 등을 담아두는 디렉토리입니다.
+- **pages**: `react-router-dom`을 이용해해 이동하는 페이지들입니다.
+- **style**: 스타일 중심으로 자주 쓰는 코드들(`MainCOntainer`...)을 모아두는 디렉토리입니다.
 
 ## Implement Requirements
 
@@ -122,6 +123,15 @@ REACT_APP_DEV_API_URL = https://dummyjson.com/products
 
 `Search.tsx`에서 `input` tag와 `searching_section`에서 `css-in-js`를 사용하지 않았습니다. 해당 방식으로 스타일링 할 시 입력할 때마다 반응이 느려지는 현상이 있었습니다. `css-in-js`의 경우 자바스크립트 해석 과정이 필요하기 때문에 반응이 느려지는 것이라 가설을 세우고 css 모듈 방식을 사용하니 해당 현상이 사라졌습니다.
 
+### Error Page, Loader
+* 에러 발생시 보이는 에러 페이지와 로딩 시 보이는 로더 컴포넌트를 제작하였습니다.
+
+### 전역 상태 관리: `isSearchMode`
+* 헤더로 검색 바 및 목록으로 돌아가기를 구현하였기에 검색 중인지 아닌지를 구분하는 상태를 관리하였습니다.
+
+
+## Issue
+* `SearchPage`와 `Search`간 매끄럽지 않은 연결이 있습니다. 현재 검색 바에 잘못된 결과가 나오는 검색을 하였을 시 해당 결과도 `/search` 페이지에서 랜더링 되기 때문에 재검색 이슈가 있습니다. 현재 임시로 검색 결과가 없을 시 3초 뒤 메인 페이지로 이동합니다. 전역 상태 관리를 사용하거나, 잘못된 결과가 나올 시 page 자체를 이동하거나 모달을 띄우는 방향으로 리펙토링 할 수 있으리라 예상합니다.
 ## References
 
 ### css
