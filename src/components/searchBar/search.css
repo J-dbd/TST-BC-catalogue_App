@@ -21,3 +21,27 @@
   align-items: center;
   text-align: center;
 }
+
+.searching_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.alert-text {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font-size: 15px;
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}

@@ -27,8 +27,8 @@ const Main = () => {
 
     setIsSearchMode({
       mode: false,
-      yoffset: null,
-      keyword: null,
+      yoffset: 0,
+      keyword: "",
     });
   }, []);
 

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
 import styled from "@emotion/styled";
-import API from "API/api";
+
+import { useRecoilValue } from "recoil";
+import { searchModeState } from "lib/recoil";
+
 import { Product } from "lib";
+import API from "API/api";
 
 import Loader from "components/Loader";
 import ProductCard from "components/Card";
@@ -13,38 +15,40 @@ import { PrdSection, PrdLists } from "styles/PrdSectionLists";
 const SearchPage = () => {
   const [itemLists, setItemList] = useState<Product[]>([]);
   const [isEmpty, SetIsEmpty] = useState(false);
-  const location = useLocation();
-  const navigator = useNavigate();
-
-  const keyword = location.state.keyword;
+  const isSearchMode = useRecoilValue(searchModeState);
 
   useEffect(() => {
-    if (location.state.yoffset) {
-      window.scrollTo(0, location.state.yoffset);
-    }
-    searchProducts(0, keyword);
+    window.scrollTo(0, isSearchMode.yoffset);
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productLists = await searchProducts(0, isSearchMode.keyword);
+        setItemList(productLists || []);
+      } catch (err) {
+        console.error("[SearchPage] Error! : ", err);
+        setItemList([]);
+      }
+    };
+    fetchData();
+  }, [isSearchMode.keyword]);
 
   const searchProducts = async (currPageNum: number, searchKeyword: string) => {
     const api = new API();
     try {
       const resData = await api.getSeachData(searchKeyword);
 
-      if (resData === undefined) {
-        console.log("[Main] API issue");
-        return null;
+      if (resData.total === 0) {
+        // 검색 결과가 없음
+        SetIsEmpty(true);
+        return;
       } else {
-        if (resData.total === 0) {
-          SetIsEmpty(true);
-          setTimeout(() => {
-            navigator("/");
-          }, 3000);
-        }
-        setItemList(resData.products);
+        return resData.products;
       }
     } catch (error) {
       console.error("[searchBar] Error fetching products:", error);
-      return null;
+      return [];
     }
   };
 
@@ -55,25 +59,11 @@ const SearchPage = () => {
     justify-content: center;
   `;
 
-  if (isEmpty) {
-    return (
-      <MainContainer>
-        <PrdSection>
-          <EmptyPage>검색 결과가 존재하지 않습니다!</EmptyPage>
-          <p>3초 뒤 목록으로 돌아갑니다.</p>
-        </PrdSection>
-      </MainContainer>
-    );
-  }
   return (
     <div>
       <MainContainer>
         <PrdSection>
-          {itemLists.length === 0 ? (
-            <>
-              <Loader />
-            </>
-          ) : (
+          {itemLists.length !== 0 ? (
             <PrdLists>
               {itemLists.map((product) => (
                 <li key={product.id}>
@@ -81,6 +71,10 @@ const SearchPage = () => {
                 </li>
               ))}
             </PrdLists>
+          ) : isEmpty ? (
+            <EmptyPage>검색 결과가 존재하지 않습니다</EmptyPage>
+          ) : (
+            <Loader />
           )}
         </PrdSection>
       </MainContainer>
